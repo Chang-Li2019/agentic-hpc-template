@@ -1,0 +1,32 @@
+# Environment contract. pixi.lock is committed and NEVER gitignored.
+# Add a dependency here, then: pixi install && git add pixi.toml pixi.lock
+# Never pip/conda install into a live environment.
+
+[project]
+name = "agentic-hpc-project"
+version = "0.1.0"
+description = "<one line>"
+channels = ["conda-forge", "bioconda"]
+platforms = ["linux-64", "osx-arm64"]
+
+[dependencies]
+python = ">=3.11"
+pandas = "*"
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
+pyarrow = "*"
+
+# Uncomment what the project actually needs — keep this list honest.
+# r-base = ">=4.3"
+# plink2 = "*"
+# bcftools = "*"
+# samtools = "*"
+# regenie = "*"
+# tabix = "*"
+
+[tasks]
+smoke   = "bash -c 'scripts/run.sh $STEP --smoke'"
+status  = "bash -c 'cat docs/PROGRESS.md'"
+errors  = "scripts/logtail.sh --errors"
+collect = "scripts/collect_outputs.sh"
